@@ -1,28 +1,24 @@
 <?php 
+$name = $_POST['name'];
+$visitor_email = $_POST['email'];
+$subject = $_POST['subject'];
+$message = $_POST['msg'];
 
-    if(isset($_POST['btn-send']))
-    {
-       $UserName = $_POST['name'];
-       $Email = $_POST['email'];
-       $Subject = $_POST['subject'];
-       $Msg = $_POST['msg'];
+$email_from = "oshanik22@gmail.com";
 
-       if(empty($UserName) || empty($Email) || empty($Subject) || empty($Msg))
-       {
-           header('location:index.php?error');
-       }
-       else
-       {
-           $to = "oshanik22@gmail.com";
+$email_body = "User Name: $name.\n".
+                "User Email: $visitor_email.\n".
+                    "Subject: $subject.\n".
+                        "User Message: $message .\n";
 
-           if(mail($to,$Subject,$Msg,$Email))
-           {
-               header("location:index.php?success");
-           }
-       }
-    }
-    else
-    {
-        header("location:index.php");
-    }
+
+
+$to = "itsolutionsvnv@gmail.com";
+$headers = "From : $email_from \r\n";
+$headers .= "Reply-To: $visitor_email \r\n";
+
+mail($to, $subject, $email_body, $headers);
+
+header("Location : index.html");
+
 ?>
